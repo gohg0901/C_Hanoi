@@ -19,5 +19,6 @@ main() {
 	printf("input : ");
 	scanf("%d",&n);
 	
+
 	hanoi(n, 'A', 'B', 'C');
 }
