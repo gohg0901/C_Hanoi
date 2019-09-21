@@ -5,34 +5,17 @@ void print_underbar() {
 	printf("-----A-----     -----B-----     -----C-----\n");
 }
 
-int print_star(int n,int d,int num) {
-	int i,j;
-	d++;
-	for (i = 0; i < n; i++) {
-		if (num == 0)
-		for (j = 0; j < d; j++) {
-			printf("*");
-		}
-		for (j = 0; j < 11 - d; j++) {
-			printf(" ");
-		}
-		d++;
-		printf("\n");
-	}
-	
-
-}
 void hanoi(int n,char from, char tmp, char to) {
 
 	if (n == 1) {
 		printf("              원반 1를 %c -> %c \n", from, to);
-		print_star(n,0,to);
+		
 		print_underbar();
 	}
 	else {
 		hanoi(n - 1 , from, to, tmp);
 		printf("              원반 %d를 %c -> %c \n", n, from, to);
-		print_star(n,0,to);
+
 		print_underbar();
 		hanoi(n - 1 , tmp, from, to);
 	}
@@ -41,12 +24,21 @@ void hanoi(int n,char from, char tmp, char to) {
 
 main() {
 	int n;
+	int i, j;
+	int d = 1;
 	printf("input (1 <= n <= 10 ) : ");
 	scanf_s("%d", &n);
 
-
+	
+	//시작상태 print
 	printf("                  시작상태                 \n");
-	print_star(n,0,'A');
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < d; j++) {
+			printf("*");
+		}
+		d++;
+		printf("\n");
+	}
 	print_underbar();
 
 	//n번 돌림
