@@ -1,67 +1,55 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-
-typedef struct _stack {
-	int s[11];
-	int top;
-
-}Stack;
-
-void push(Stack* a, int i) {
-
-	a->top = a->top + 1;
-	a->s[a->top] = i;
+void print_underbar() {
+	printf("-----A-----     -----B-----     -----C-----\n");
 }
 
-int pop(Stack* a) {
-
-	a->top = a->top - 1;
-	return a->s[a->top + 1];
-}
-
-void hanoi(int n, Stack *from, Stack *tmp, Stack *to) {
+int print_star(int n,int d,int num) {
+	int i,j;
+	d++;
+	for (i = 0; i < n; i++) {
+		if (num == 0)
+		for (j = 0; j < d; j++) {
+			printf("*");
+		}
+		for (j = 0; j < 11 - d; j++) {
+			printf(" ");
+		}
+		d++;
+		printf("\n");
+	}
 	
-	if (n == 1) {
-		push(to, 1);
-		pop(from);
 
-		
+}
+void hanoi(int n,char from, char tmp, char to) {
+
+	if (n == 1) {
+		printf("              원반 1를 %c -> %c \n", from, to);
+		print_star(n,0,to);
+		print_underbar();
 	}
 	else {
-		hanoi(n - 1, from, to, tmp);
-		printf("원반 %d를 %d -> %d \n",n,from,to);
-		printf("-----A-----     -----B-----     -----C-----\n");
-		hanoi(n - 1, tmp, from, to);
+		hanoi(n - 1 , from, to, tmp);
+		printf("              원반 %d를 %c -> %c \n", n, from, to);
+		print_star(n,0,to);
+		print_underbar();
+		hanoi(n - 1 , tmp, from, to);
 	}
+
 }
 
 main() {
 	int n;
-	int x;
-
-	Stack from;
-	Stack tmp;
-	Stack to;
-
-	from.top = -1;
-	tmp.top = -1;
-	to.top = -1;
-
-
 	printf("input (1 <= n <= 10 ) : ");
-	scanf("%d",&n);
-
-	//push(&A, 8);
-	//x = pop(&A);
-	//printf("%d \n", x);
+	scanf_s("%d", &n);
 
 
-	hanoi(n, &from, &tmp, &to);
-	printf("-----A-----     -----B-----     -----C-----\n");
+	printf("                  시작상태                 \n");
+	print_star(n,0,'A');
+	print_underbar();
 
-
-
-
+	//n번 돌림
+	hanoi(n, 'A','B','C');
 
 }
